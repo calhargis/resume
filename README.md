@@ -20,8 +20,8 @@ folder.
 ## Root GitHub.io redirect
 
 The bare URL `https://calhargis.github.io/` is controlled by a separate repository
-named `calhargis.github.io`. To redirect that URL to this site, create that repo
-and put this `index.html` at its root:
+named `calhargis.github.io`. That repository is configured with this `index.html`
+at its root so browsers are sent to the resume site:
 
 ```html
 <!doctype html>
