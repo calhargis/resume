@@ -1271,6 +1271,27 @@ select {
   .button {
     justify-content: center;
   }
+  .topbar__nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+    overflow: visible;
+  }
+  .topbar__nav a {
+    min-width: 0;
+    width: 100%;
+    padding: 0.68rem 0.55rem;
+    border-color: #ffffff14;
+    background:
+      linear-gradient(180deg, #ffffff0c, #ffffff05),
+      linear-gradient(120deg, #ff2e630a, #21d4fd0a);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+  .topbar__nav a:last-child {
+    grid-column: 1 / -1;
+  }
   .section {
     padding: 3.6rem 0;
   }
