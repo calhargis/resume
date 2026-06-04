@@ -233,15 +233,17 @@ select {
     );
 }
 .scene__sun {
-  --sun-slit: 25%;
-  --sun-slit-bar: 12.52%;
+  --sun-size: min(22rem, 34vw);
+  --sun-slit: 0.165em;
+  --sun-slit-bar: 0.0826em;
   --sun-slit-duration: calc(2.6s / 1.5);
   top: 10vh;
   right: min(8vw, 6rem);
-  width: min(22rem, 34vw);
+  width: var(--sun-size);
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
+  font-size: var(--sun-size);
   background: linear-gradient(
     to bottom,
     var(--amber) 0%,
@@ -1020,6 +1022,7 @@ select {
 }
 .meta-badges {
   display: flex;
+  flex: 0 0 auto;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 0.45rem;
@@ -1034,7 +1037,24 @@ select {
 .meta-badges span {
   padding: 0.45rem 0.72rem;
   font-size: 0.8rem;
+  line-height: 1;
+  white-space: nowrap;
   color: var(--muted);
+}
+.supporting-grid--experience .feature-card__meta {
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.supporting-grid--experience .feature-card__identity {
+  width: 100%;
+}
+.supporting-grid--experience .meta-badges {
+  gap: 0.35rem;
+  justify-content: flex-start;
+}
+.supporting-grid--experience .meta-badges span {
+  padding: 0.4rem 0.58rem;
+  font-size: 0.76rem;
 }
 .feature-card__summary,
 .project-card__summary {
@@ -1211,7 +1231,7 @@ select {
   }
   .scene__sun {
     right: -2rem;
-    width: min(18rem, 40vw);
+    --sun-size: min(18rem, 40vw);
   }
 }
 @media (max-width: 760px) {
@@ -1265,7 +1285,7 @@ select {
   .scene__sun {
     top: 6rem;
     right: -4rem;
-    width: min(14rem, 44vw);
+    --sun-size: min(14rem, 44vw);
   }
   .feature-card,
   .project-card,
