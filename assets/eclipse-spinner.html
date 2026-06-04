@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Eclipse Loading Spinner</title>
+<style>
+  /* ============================================================
+     ECLIPSE — synthwave loading spinner (fully self-contained)
+     No scripts, no dependencies — open this file directly and it works.
+     Tune it by editing the variables in the .spin inline style below:
+       --size      overall size (1em == --size)
+       --spd       speed multiplier (higher = faster)
+       --glow      glow intensity multiplier
+       --slit      scan-line period (em)   --slit-bar  line thickness (em)
+       --sw-*      palette colors
+     ============================================================ */
+  .spin {
+    font-size: var(--size);
+    width: 1em; height: 1em;
+    position: relative; display: grid; place-items: center;
+  }
+  .spin * { box-sizing: border-box; }
+
+  .orb-halo {
+    position: absolute; width: .9em; height: .9em; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,240,255,.20) 0%, rgba(162,60,255,.10) 48%, transparent 68%);
+    animation: ecl-breathe calc(3.6s / var(--spd)) ease-in-out infinite;
+  }
+  .orb-ring {
+    position: absolute; width: .42em; height: .42em; border-radius: 50%;
+    border: .012em solid var(--sw-cyan);
+    box-shadow: 0 0 calc(.06em * var(--glow)) var(--sw-cyan);
+    /* shares the sun's 2.4s cycle so swell + pulse stay locked together */
+    animation: ecl-expand calc(2.4s / var(--spd)) ease-out infinite;
+  }
+  /* born at the sun's rim (.42em) when the sun is largest, expands out to the
+     red arc (.76em) and fades fully BEFORE arriving — stops at the red, never
+     crosses it */
+  @keyframes ecl-expand {
+    0%   { width: .42em; height: .42em; opacity: 0; }
+    12%  { opacity: .9; }
+    90%  { opacity: .55; }
+    100% { width: .76em; height: .76em; opacity: 0; }
+  }
+  .orb-arc {
+    position: absolute; width: .76em; height: .76em; border-radius: 50%;
+    border: .015em solid transparent;
+    color: var(--sw-pink);
+    border-left-color: currentColor; border-right-color: currentColor;
+    box-shadow: 0 0 calc(.05em * var(--glow)) currentColor;
+    /* spin, plus a color cycle whose shifts land on each pulse arrival */
+    animation: ecl-spin calc(2.4s / var(--spd)) linear infinite reverse,
+               ecl-arc-color calc(7.2s / var(--spd)) linear infinite;
+  }
+  @keyframes ecl-spin { to { transform: rotate(360deg); } }
+  /* 7.2s = three 2.4s pulse cycles; the quick shift at each ⅓ boundary
+     coincides with the cyan pulse reaching the arc → pink → violet → cyan */
+  @keyframes ecl-arc-color {
+    0%     { color: var(--sw-pink); }
+    30%    { color: var(--sw-pink); }
+    33.33% { color: var(--sw-violet); }
+    63%    { color: var(--sw-violet); }
+    66.67% { color: var(--sw-cyan); }
+    97%    { color: var(--sw-cyan); }
+    100%   { color: var(--sw-pink); }
+  }
+
+  .orb-sun {
+    position: absolute; width: .42em; height: .42em; border-radius: 50%; overflow: hidden;
+    background: linear-gradient(to bottom,
+        var(--sw-warm) 0%, #ff9a6b 28%, var(--sw-pink) 60%, var(--sw-violet) 100%);
+    box-shadow: 0 0 calc(.10em * var(--glow)) rgba(255,216,107,.6),
+                0 0 calc(.22em * var(--glow)) rgba(255,46,151,.5),
+                inset 0 0 .08em rgba(255,255,255,.3);
+    animation: ecl-pulse calc(2.4s / var(--spd)) ease-in-out infinite;
+  }
+  .orb-sun-slits {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 66%;
+    background: repeating-linear-gradient(to bottom,
+        rgba(13,2,33,0) 0,
+        rgba(13,2,33,0) calc(var(--slit) - var(--slit-bar)),
+        var(--sw-bg)     calc(var(--slit) - var(--slit-bar)),
+        var(--sw-bg)     var(--slit));
+    -webkit-mask: linear-gradient(to bottom,
+        transparent 0%, #000 32%, #000 52%,
+        rgba(0,0,0,.62) 68%, rgba(0,0,0,.30) 84%, transparent 100%);
+            mask: linear-gradient(to bottom,
+        transparent 0%, #000 32%, #000 52%,
+        rgba(0,0,0,.62) 68%, rgba(0,0,0,.30) 84%, transparent 100%);
+    animation: ecl-slits calc(2.6s / var(--spd)) linear infinite;
+  }
+  @keyframes ecl-slits {
+    from { background-position: 0 0; }
+    to   { background-position: 0 calc(-1 * var(--slit)); }
+  }
+  /* largest at the cycle boundary (0%/100%) — the exact moment the pulse ring
+     is born, so the sun visibly "pushes" the ring outward */
+  @keyframes ecl-pulse   { 0%,100% { transform: scale(1.12); } 50% { transform: scale(1); } }
+  @keyframes ecl-breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+
+  /* ---- demo stage (delete if embedding the .spin elsewhere) ---- */
+  html, body { margin: 0; height: 100%; }
+  body {
+    display: grid; place-items: center;
+    background: radial-gradient(ellipse at 50% 42%, #1e0840 0%, #0d0221 70%), #000;
+  }
+  .crt-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 40;
+    background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0 2px, rgba(0,0,0,.22) 2px 3px),
+                radial-gradient(ellipse at center, transparent 60%, rgba(10,0,30,.5) 100%);
+    mix-blend-mode: multiply; }
+</style>
+</head>
+<body>
+
+  <!-- ===== THE SPINNER — your saved settings are baked into these vars ===== -->
+  <div class="spin" style="
+      --size: 360px;
+      --spd: 1.5;
+      --glow: 2.4;
+      --slit: .0693em;
+      --slit-bar: .0347em;
+      --sw-bg:     #0d0221;
+      --sw-pink:   #ff2e63;
+      --sw-cyan:   #21d4fd;
+      --sw-violet: #b621fe;
+      --sw-warm:   #ffd86b;">
+    <div class="orb-halo"></div>
+    <div class="orb-ring"></div>
+    <div class="orb-arc"></div>
+    <div class="orb-sun"><div class="orb-sun-slits"></div></div>
+  </div>
+
+  <!-- CRT scanline overlay (remove this line to turn it off) -->
+  <div class="crt-overlay"></div>
+
+</body>
+</html>
