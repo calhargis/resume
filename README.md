@@ -2,7 +2,7 @@
 
 Static HTML/CSS/JS resume site for Cal Hargis.
 
-The site is intended to be published at:
+The site is currently published at:
 
 ```text
 https://calhargis.github.io/resume/
