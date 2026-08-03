@@ -958,6 +958,17 @@ select {
   gap: 1.15rem;
   padding: 1.45rem;
 }
+.project-card--wide {
+  grid-column: 1 / -1;
+}
+.project-card--wide .project-card__highlights {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.project-card__highlights strong {
+  color: var(--text);
+  font-weight: 600;
+}
 .feature-card--primary {
   border-color: var(--border-strong);
   background:
@@ -1228,6 +1239,10 @@ select {
   .kingsley-grid,
   .supporting-grid--experience {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .project-card--wide .project-card__highlights {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
   }
   .scene__sun {
     right: -2rem;
