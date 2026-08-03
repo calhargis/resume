@@ -523,17 +523,50 @@
               <div class="project-card__header">
                 <div>
                   <p class="project-card__stack">
-                    ASP.NET Core, PostgreSQL, Redis, MinIO, Docker, SignalR
+                    Python, FastAPI, SvelteKit, TimescaleDB, MQTT
                   </p>
-                  <h3>TurboGrid</h3>
+                  <h3>eeper</h3>
                 </div>
                 <a
-                  href="https://github.com/calhargis/TurboGrid"
+                  href="https://github.com/calhargis/eeper"
                   target="_blank"
                   rel="noreferrer"
                 >
                   Open
                 </a>
+              </div>
+              <p class="project-card__summary">
+                An open source, self-hosted baby monitoring system that turns a
+                camera, a microphone, and inexpensive DIY sensors into live
+                video and sleep insights, with every bit of processing done
+                locally on your own network.
+              </p>
+              <ul class="project-card__highlights">
+                <li>
+                  Designed a protocol-first architecture around RTSP video and a
+                  small MQTT sensor contract, so the stack runs on a Raspberry
+                  Pi, a NAS, or any Linux box.
+                </li>
+                <li>
+                  Runs cry detection, movement, and sleep/wake fusion entirely
+                  on-device with local ML inference: no cloud, no accounts, and
+                  no telemetry.
+                </li>
+                <li>
+                  Held to strict engineering gates including multi-arch CI,
+                  strict typing, supply-chain scanning, and forced credential
+                  and TLS setup on first boot.
+                </li>
+              </ul>
+            </article>
+            <article class="project-card reveal" data-reveal>
+              <div class="project-card__header">
+                <div>
+                  <p class="project-card__stack">
+                    ASP.NET Core, PostgreSQL, Redis, MinIO, Docker, SignalR
+                  </p>
+                  <h3>TurboGrid</h3>
+                </div>
               </div>
               <p class="project-card__summary">
                 A backend-first platform for a car-community game or app with
@@ -555,39 +588,43 @@
                 </li>
               </ul>
             </article>
-            <article class="project-card reveal" data-reveal>
+            <article
+              class="project-card project-card--wide reveal"
+              data-reveal
+            >
               <div class="project-card__header">
                 <div>
                   <p class="project-card__stack">
-                    Java, Raspberry Pi, Minecraft plugin development
+                    Java, TypeScript, Raspberry Pi, Astro
                   </p>
-                  <h3>raspberrypi_shock_minecraft</h3>
+                  <h3>More on GitHub</h3>
                 </div>
                 <a
-                  href="https://github.com/calhargis/raspberrypi_shock_minecraft"
+                  href="https://github.com/calhargis"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Open
+                  GitHub
                 </a>
               </div>
               <p class="project-card__summary">
-                A Minecraft plugin that reacts to gameplay events and routes
-                them into hardware-triggered actions through a Raspberry Pi
-                executable interface.
+                A handful of smaller builds and experiments that show the range
+                of what I like to work on. The full list lives on my GitHub
+                profile.
               </p>
               <ul class="project-card__highlights">
                 <li>
-                  Connected game events to external executable workflows in a
-                  memorable hardware-software integration project.
+                  <strong>raspberrypi_shock_minecraft</strong> — a Java
+                  Minecraft plugin that routes in-game events into
+                  hardware-triggered actions through a Raspberry Pi.
                 </li>
                 <li>
-                  Added configurable command behavior for player targeting and
-                  deployment paths.
+                  <strong>WatchGames</strong> — a wearable gaming experiment
+                  built around very small screens and short interactions.
                 </li>
                 <li>
-                  Demonstrates practical Java development with an unconventional
-                  product idea.
+                  <strong>This resume site</strong> — a hand-tuned static build
+                  deployed through a GitHub Actions Pages workflow.
                 </li>
               </ul>
             </article>
